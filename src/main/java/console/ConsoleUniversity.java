@@ -18,16 +18,16 @@ public class ConsoleUniversity {
         this.scan = new Scanner(System.in);
     }
 
-    public void run(){
+    public void run() {
         mainMenu();
     }
 
-    private void mainMenu(){
+    private void mainMenu() {
         LOG.info("Hello you are in main menu, type (help) for more information");
-        while(true){
+        while (true) {
             LOG.info(Constants.INPUT_VALUE);
             String value = scan.nextLine();
-            switch(value){
+            switch (value) {
                 case "help":
                     helpMenu();
                     break;
@@ -54,95 +54,99 @@ public class ConsoleUniversity {
         }
     }
 
-    private void helpMenu(){
+    private void helpMenu() {
         LOG.info(Constants.HELP_MENU);
     }
 
-    private Departments inputDepartment(){
+    private Departments inputDepartment() {
         LOG.info("please input department name");
         String value = scan.nextLine();
         Departments department;
-        Optional<Departments> result = Departments.stream().filter(dep->dep.getName().equalsIgnoreCase(value)).findFirst();
-        if(result.isPresent())
+        Optional<Departments> result = Departments.stream().filter(dep -> dep.getName().equalsIgnoreCase(value)).findFirst();
+        if (result.isPresent())
             return department = result.get();
         else
-            Departments.stream().forEach(dep->LOG.info(dep.getName()));
-            throw new NoSuchElementException();
+            Departments.stream().forEach(dep -> LOG.info(dep.getName()));
+        throw new NoSuchElementException();
     }
 
-    private void getDepartmentHead(){
+    private void getDepartmentHead() {
         try {
             LOG.info("Show head of department");
             user.getDepartmentHead(inputDepartment());
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             LOG.info("Unknown department, please input one of department from list");
             getDepartmentHead();
         }
     }
 
-    private void getAverageSalary(){
+    private void getAverageSalary() {
         try {
             LOG.info("Show the average salary for department");
             user.getDepartmentAverageSalary(inputDepartment());
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             LOG.info("Unknown department, please input one of department from list");
             getAverageSalary();
         }
     }
 
-    private void getDepartmentSummary(){
+    private void getDepartmentSummary() {
         try {
             LOG.info("Show departments statistic of employee");
             user.getDepartmentSummary(inputDepartment());
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             LOG.info("Unknown department, please input one of department from list");
             getDepartmentSummary();
         }
     }
 
-    private void getEmployeeCount(){
+    private void getEmployeeCount() {
         try {
             LOG.info("Show count of employee for department");
             user.getDepartmentEmployeeCount(inputDepartment());
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             LOG.info("Unknown department, please input one of department from list");
             getEmployeeCount();
         }
     }
 
-    private void search(){
+    private void search() {
         LOG.info("please input search criterion like template name of table(-dep, -lec, -deg) and search criterion for example(-dep ivan)");
         String value = scan.nextLine();
-        String tableValue = value.substring(0,4);
-        if(tableValue.equalsIgnoreCase("-dep")){
-            List<String> departments = searchByDepartments(value);
-            if(departments.isEmpty())
-                LOG.info("Don't found any department");
-            else
-                LOG.info("we found this departments in data base");
-                departments.forEach(dep->LOG.info(dep+"\n"));
-        }else if(tableValue.equalsIgnoreCase("-lec")){
-            List<String> lectors = searchByLectors(value);
-            if(lectors.isEmpty())
-                LOG.info("Don't found any department");
-            else
-                LOG.info("we found this lectors in data base");
-                lectors.forEach(lec ->LOG.info(lec+"\n"));
-        }else if(tableValue.equalsIgnoreCase("-lec"))
-        {
-            List<String> degree = searchByDegree(value);
-            if(degree.isEmpty())
-                LOG.info("Don't found any department");
-            else
-                LOG.info("we found this degree in data base");
-                degree.forEach(lec ->LOG.info(lec+"\n"));
-        }else{
+        String tableValue = value.substring(0, 4);
+        if (value.length() > 4) {
+            if (tableValue.equalsIgnoreCase("-dep")) {
+                List<String> departments = searchByDepartments(value);
+                if (departments.isEmpty())
+                    LOG.info("Don't found any department");
+                else
+                    LOG.info("we found this departments in data base");
+                departments.forEach(dep -> LOG.info(dep + "\n"));
+            } else if (tableValue.equalsIgnoreCase("-lec")) {
+                List<String> lectors = searchByLectors(value);
+                if (lectors.isEmpty())
+                    LOG.info("Don't found any lector");
+                else
+                    LOG.info("we found this lectors in data base");
+                lectors.forEach(lec -> LOG.info(lec + "\n"));
+            } else if (tableValue.equalsIgnoreCase("-deg")) {
+                List<String> degree = searchByDegree(value);
+                if (degree.isEmpty())
+                    LOG.info("Don't found any degree");
+                else
+                    LOG.info("we found this degree in data base");
+                degree.forEach(lec -> LOG.info(lec + "\n"));
+            } else {
+                LOG.info("invalid template");
+                search();
+            }
+        }else {
             LOG.info("invalid template");
             search();
         }
     }
 
-    private List<String> searchByDepartments(String value){
+    private List<String> searchByDepartments(String value) {
         List<String> foundDepartments = new ArrayList<>();
         user.getDepartmentsName().forEach(dep -> {
             if (dep.contains(value.substring(5, value.length())))
@@ -151,7 +155,7 @@ public class ConsoleUniversity {
         return foundDepartments;
     }
 
-    private List<String> searchByLectors(String value){
+    private List<String> searchByLectors(String value) {
         List<String> foundLectors = new ArrayList<>();
         user.getLectorsName().forEach(lec -> {
             if (lec.contains(value.substring(5, value.length())))
@@ -160,9 +164,9 @@ public class ConsoleUniversity {
         return foundLectors;
     }
 
-    private List<String> searchByDegree(String value){
+    private List<String> searchByDegree(String value) {
         List<String> foundDegree = new ArrayList<>();
-        user.getLectorsName().forEach(deg -> {
+        user.getDegree().forEach(deg -> {
             if (deg.contains(value.substring(5, value.length())))
                 foundDegree.add(deg);
         });
