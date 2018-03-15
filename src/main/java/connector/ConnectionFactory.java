@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
     private static ConnectionFactory instance = new ConnectionFactory();
-    private static final String URL = "jdbc:mysql://localhost:3306/university";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Vv7891525";
+    private static final String URL = "jdbc:mysql://192.168.0.105/university";
+    private static final String USER = "newuser";
+    private static final String PASSWORD = "hello";
     private static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
 
     //private constructor
