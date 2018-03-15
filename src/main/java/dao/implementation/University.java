@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class University implements UniversityDAO{
@@ -78,5 +80,53 @@ public class University implements UniversityDAO{
             e.printStackTrace();
         }
         return employeeCount;
+    }
+
+    @Override
+    public List<String> getDepartments() {
+        List<String> departments = new ArrayList<>();
+        try {
+            Connection conn = ConnectionFactory.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(Constants.GET_DEPARTMENTS_QUERY);
+            while (rs.next()){
+                departments.add(rs.getString(1));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return departments;
+    }
+
+    @Override
+    public List<String> getLectors() {
+        List<String> lectors = new ArrayList<>();
+        try {
+            Connection conn = ConnectionFactory.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(Constants.GET_LECTORS_QUERY);
+            while (rs.next()){
+                lectors.add(rs.getString(1) + " " + rs.getString(2));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return lectors;
+    }
+
+    @Override
+    public List<String> getDegree() {
+        List<String> degree = new ArrayList<>();
+        try {
+            Connection conn = ConnectionFactory.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(Constants.GET_DEGREE_QUERY);
+            while (rs.next()){
+                degree.add(rs.getString(1));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return degree;
     }
 }

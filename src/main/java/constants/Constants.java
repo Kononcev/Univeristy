@@ -21,7 +21,13 @@ public interface Constants {
             "JOIN department ON lectors.department_id=department.department_id\n" +
             "WHERE department_name=\"%s\";";
 
-    String HELP_MENU = "\n1 - get head of department\n2 - get employee count of department\n3 - get department employee statistics\n4 - get average salary of department\nhelp - open help menu\nquit - exit from application";
+    String GET_DEPARTMENTS_QUERY = "SELECT department_name FROM university.department;";
+
+    String GET_LECTORS_QUERY = "SELECT name, surname FROM university.lectors;";
+
+    String GET_DEGREE_QUERY = "SELECT degree FROM university.degree;";
+
+    String HELP_MENU = "\n1 - get head of department\n2 - get employee count of department\n3 - get department employee statistics\n4 - get average salary of department\nsearch - global search by template\nhelp - open help menu\nquit - exit from application";
 
     String INPUT_VALUE = "please input command";
 
