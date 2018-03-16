@@ -23,7 +23,7 @@ public class ConsoleUniversity {
     }
 
     private void mainMenu() {
-        LOG.info("Hello you are in main menu, type (help) for more information");
+        LOG.info(Constants.GREATINGS);
         while (true) {
             LOG.info(Constants.INPUT_VALUE);
             String value = scan.nextLine();
@@ -49,7 +49,7 @@ public class ConsoleUniversity {
                 case "quit":
                     System.exit(0);
                 default:
-                    LOG.info("Unknown command, for more info type (help)");
+                    LOG.info(Constants.UNKNOWN_COMMAND);
             }
         }
     }
@@ -72,76 +72,76 @@ public class ConsoleUniversity {
 
     private void getDepartmentHead() {
         try {
-            LOG.info("Show head of department");
+            LOG.info(Constants.SHOW_HEAD_OF_DEPARTMENT);
             user.getDepartmentHead(inputDepartment());
         } catch (NoSuchElementException e) {
-            LOG.info("Unknown department, please input one of department from list");
+            LOG.info(Constants.UNKNOWN_SEARCH_VALUE);
             getDepartmentHead();
         }
     }
 
     private void getAverageSalary() {
         try {
-            LOG.info("Show the average salary for department");
+            LOG.info(Constants.SHOW_AVERAGE_SALARY);
             user.getDepartmentAverageSalary(inputDepartment());
         } catch (NoSuchElementException e) {
-            LOG.info("Unknown department, please input one of department from list");
+            LOG.info(Constants.UNKNOWN_SEARCH_VALUE);
             getAverageSalary();
         }
     }
 
     private void getDepartmentSummary() {
         try {
-            LOG.info("Show departments statistic of employee");
+            LOG.info(Constants.SHOW_DEPARTMENT_STATISTICS);
             user.getDepartmentSummary(inputDepartment());
         } catch (NoSuchElementException e) {
-            LOG.info("Unknown department, please input one of department from list");
+            LOG.info(Constants.UNKNOWN_SEARCH_VALUE);
             getDepartmentSummary();
         }
     }
 
     private void getEmployeeCount() {
         try {
-            LOG.info("Show count of employee for department");
+            LOG.info(Constants.SHOW_EMPLOYEE_COUNT_OF_DEPARTMENT);
             user.getDepartmentEmployeeCount(inputDepartment());
         } catch (NoSuchElementException e) {
-            LOG.info("Unknown department, please input one of department from list");
+            LOG.info(Constants.UNKNOWN_SEARCH_VALUE);
             getEmployeeCount();
         }
     }
 
     private void search() {
-        LOG.info("please input search criterion like template name of table(-dep, -lec, -deg) and search criterion for example(-dep ivan)");
+        LOG.info(Constants.SEARCH_HELP);
         String value = scan.nextLine();
         String tableValue = value.substring(0, 4);
         if (value.length() > 4) {
             if (tableValue.equalsIgnoreCase("-dep")) {
                 List<String> departments = searchByDepartments(value);
                 if (departments.isEmpty())
-                    LOG.info("Don't found any department");
+                    LOG.info(Constants.NO_SEARCH_RESULT);
                 else
-                    LOG.info("we found this departments in data base");
+                    LOG.info(Constants.SEARCH_RESULTS);
                 departments.forEach(dep -> LOG.info(dep + "\n"));
             } else if (tableValue.equalsIgnoreCase("-lec")) {
                 List<String> lectors = searchByLectors(value);
                 if (lectors.isEmpty())
-                    LOG.info("Don't found any lector");
+                    LOG.info(Constants.NO_SEARCH_RESULT);
                 else
-                    LOG.info("we found this lectors in data base");
+                    LOG.info(Constants.SEARCH_RESULTS);
                 lectors.forEach(lec -> LOG.info(lec + "\n"));
             } else if (tableValue.equalsIgnoreCase("-deg")) {
                 List<String> degree = searchByDegree(value);
                 if (degree.isEmpty())
-                    LOG.info("Don't found any degree");
+                    LOG.info(Constants.NO_SEARCH_RESULT);
                 else
-                    LOG.info("we found this degree in data base");
+                    LOG.info(Constants.SEARCH_RESULTS);
                 degree.forEach(lec -> LOG.info(lec + "\n"));
             } else {
-                LOG.info("invalid template");
+                LOG.info(Constants.INVALID_TEMPLATE);
                 search();
             }
         }else {
-            LOG.info("invalid template");
+            LOG.info(Constants.INVALID_TEMPLATE);
             search();
         }
     }

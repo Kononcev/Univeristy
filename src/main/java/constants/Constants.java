@@ -27,10 +27,24 @@ public interface Constants {
 
     String GET_DEGREE_QUERY = "SELECT degree FROM university.degree;";
 
-    String HELP_MENU = "\n1 - get head of department\n2 - get employee count of department\n3 - get department employee statistics\n4 - get average salary of department\nsearch - global search by template\nhelp - open help menu\nquit - exit from application";
+    String HELP_MENU = "\n1 - get head of department\n2 - get employee count of department\n3 - get department employee statistics\n4 - get average salary of department\nsearch - global search by template\nhelp - open help menu\nquit - exit from application\n";
 
-    String INPUT_VALUE = "please input command";
+    String INPUT_VALUE = "Please input command, for more info type (help)";
 
     DecimalFormat DOUBLE_WITH_TWO_DIGITS = new DecimalFormat("0.00");
+
+    //Menu
+
+    String INVALID_TEMPLATE = "invalid template";
+    String NO_SEARCH_RESULT = "Don't found any result";
+    String SEARCH_RESULTS = "<---Search results--->\n";
+    String SEARCH_HELP = "please input search criterion like template name of table(-dep, -lec, -deg) and search criterion for example(-dep ivan)";
+    String UNKNOWN_SEARCH_VALUE = "Unknown department, please input one of department from list";
+    String SHOW_HEAD_OF_DEPARTMENT = "Show head of department";
+    String SHOW_EMPLOYEE_COUNT_OF_DEPARTMENT = "Show count of employee for department";
+    String SHOW_DEPARTMENT_STATISTICS = "Show departments statistic of employee";
+    String SHOW_AVERAGE_SALARY = "Show the average salary for department";
+    String UNKNOWN_COMMAND = "Unknown command, for more info type (help)";
+    String GREATINGS = "Hello you are in main menu, there is a list of available commands:\n" + HELP_MENU;
 
 }
