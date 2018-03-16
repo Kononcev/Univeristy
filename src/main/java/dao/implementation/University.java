@@ -29,7 +29,7 @@ public class University implements UniversityDAO{
                 departmentHead.put(rs.getString(1), (rs.getString(2)+" "+rs.getString(3)));
             }
         }catch(SQLException e){
-            e.printStackTrace();
+            LOG.info("No connection with data base");
         }
         return departmentHead;
     }
